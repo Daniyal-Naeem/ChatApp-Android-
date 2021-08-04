@@ -1,29 +1,44 @@
 import React, {useEffect} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import { Provider } from 'react-native-paper'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { theme } from './src/core/theme'
+import {
+  StartScreen,
+  LoginScreen,
+  RegisterScreen,
+  ResetPasswordScreen,
+  Dashboard,
+} from './src/screens'
+
+const Stack = createStackNavigator()
+
 const App = () => {
-useEffect(()=> {
-  SplashScreen.hide()
-}, [])
+  useEffect(()=> {
+    SplashScreen.hide()
+  }, [])
   return (
-    <SafeAreaView>
-      <ScrollView>
-      <View>
-        <Text>Hello</Text>
-      </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
 
-const styles = StyleSheet.create({
- 
-});
-
+    <Provider theme={theme}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="StartScreen"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="StartScreen" component={StartScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen
+            name="ResetPasswordScreen"
+            component={ResetPasswordScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  )
+}
 export default App;
