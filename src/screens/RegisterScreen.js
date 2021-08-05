@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, KeyboardAvoidingView,
+  ScrollView, Dimensions } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -11,6 +12,8 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
+
+const screenHeight = Dimensions.get('screen').height;
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: '', error: '' })
@@ -29,11 +32,15 @@ export default function RegisterScreen({ navigation }) {
     }
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Dashboard' }],
+      routes: [{ name: 'MessagesScreen' }],
     })
   }
 
   return (
+    <KeyboardAvoidingView style={{flex: 1}}>
+    <ScrollView
+      contentContainerStyle={{minHeight: screenHeight}}
+      bounces={false}>
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
@@ -81,6 +88,8 @@ export default function RegisterScreen({ navigation }) {
         </TouchableOpacity>
       </View>
     </Background>
+    </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
