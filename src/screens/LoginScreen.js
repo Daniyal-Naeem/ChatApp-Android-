@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, StyleSheet, View, KeyboardAvoidingView,
+   ScrollView, Dimensions } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -10,6 +11,8 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+
+const screenHeight = Dimensions.get('screen').height;
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -25,11 +28,15 @@ export default function LoginScreen({ navigation }) {
     }
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Dashboard' }],
+      routes: [{ name: 'MessagesScreen' }],
     })
   }
 
   return (
+    <KeyboardAvoidingView style={{flex: 1}}>
+      <ScrollView
+        contentContainerStyle={{minHeight: screenHeight}}
+        bounces={false}>
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
@@ -72,6 +79,8 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
       </View>
     </Background>
+    </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
