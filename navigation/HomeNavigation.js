@@ -1,34 +1,31 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import Colors from "../constants/Colors"
-import {MessagesScreen} from '../src/screens'
+import * as React from 'react';
+import Colors from "../constants/Colors";
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import MessagesScreen from '../src/screens/MessagesScreen';
+import StatusScreen from '../src/screens/StatusScreen';
+import CallScreen from '../src/screens/CallScreen';
 
-const Stack = createStackNavigator()
+
+const Tab = createMaterialTopTabNavigator();
 
 const HomeNavigation = () => {
 
   return (
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="StartScreen"
-          screenOptions={{
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: Colors.light.tint,
-              shadowOpacity: 0,
-              elevation: 0,
-            },
-            headerTintColor: Colors.light.background,
-            headerTitleAlign: 'left',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            }
-          }}
-        >
-          <Stack.Screen name="MessagesScreen" component={MessagesScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer 
+    initialRouteName="ChatScreen"
+    >
+    <Tab.Navigator
+    screenOptions={{
+      tabBarActiveTintColor: "white",
+      tabBarLabelStyle: { fontSize: 12 },
+      tabBarStyle: { backgroundColor:Colors.light.tint},
+    }}>
+      <Tab.Screen name="Chats" component={MessagesScreen} />
+      <Tab.Screen name="Status" component={StatusScreen} />
+      <Tab.Screen name="Calls" component={CallScreen} />
+    </Tab.Navigator>
+  </NavigationContainer>
   )
 }
 export default HomeNavigation;
