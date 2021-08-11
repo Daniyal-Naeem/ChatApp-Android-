@@ -11,10 +11,10 @@ import {
 
 const Stack = createStackNavigator()
 
-const AuthNavigation = () => {
+const AuthNavigation = ({navigation}) => {
 
   return (
-      <NavigationContainer>
+    
         <Stack.Navigator
           initialRouteName="StartScreen"
           screenOptions={{
@@ -39,7 +39,7 @@ const AuthNavigation = () => {
             component={ResetPasswordScreen}
           />
         </Stack.Navigator>
-      </NavigationContainer>
+    
   )
 }
 export default AuthNavigation;
