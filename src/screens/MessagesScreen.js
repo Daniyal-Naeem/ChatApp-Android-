@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, FlatList } from 'react-native';
+import {StyleSheet, FlatList, StatusBar } from 'react-native';
 import {
   Container,
   Card,
@@ -67,6 +67,9 @@ const Messages = [
 const MessagesScreen = ({navigation}) => {
     return (
       <Container>
+          <StatusBar 
+        backgroundColor={"#fff"} 
+        barStyle={"dark-content"}/>
         <FlatList 
           data={Messages}
           keyExtractor={item=>item.id}
