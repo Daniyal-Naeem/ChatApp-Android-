@@ -1,9 +1,10 @@
+import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider } from 'react-native-paper'
 import { theme } from './src/core/theme'
-import AuthNavigation from './navigation/AuthNavigation';
-import HomeNavigation from './navigation/HomeNavigation';
+import StackNavigator from './navigation/StackNavigator';
+
 
 
 const App = () => {
@@ -12,8 +13,7 @@ const App = () => {
   }, [])
   return (
     <Provider theme={theme}>
-   {/* <AuthNavigation /> */}
-     <HomeNavigation/>
+     <StackNavigator/>
     </Provider>
   )
 }
