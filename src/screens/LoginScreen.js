@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { TouchableOpacity, StyleSheet, View, KeyboardAvoidingView,
-   ScrollView, Dimensions } from 'react-native'
+ ScrollView, Dimensions } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -11,13 +11,17 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import {AuthContext} from '../../navigation/AuthProvider';
 
 const screenHeight = Dimensions.get('screen').height;
 
 export default function LoginScreen({ navigation }) {
+  
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
-
+  
+  const {login, googleLogin} = useContext(AuthContext);
+  
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
@@ -45,7 +49,7 @@ export default function LoginScreen({ navigation }) {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
+        onChangeText={(userEmail) => setEmail(userEmail)}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -57,7 +61,7 @@ export default function LoginScreen({ navigation }) {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
+        onChangeText={(userPassword) => setPassword(userPassword)}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -69,7 +73,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <Button mode="contained" onPress={onLoginPressed}>
+      <Button mode="contained"   onPress={(onLoginPressed) => login(email, password)}>
         Login
       </Button>
       <View style={styles.row}>
@@ -78,6 +82,12 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.link}>Register</Text>
         </TouchableOpacity>
       </View>
+        <Button style={{marginTop:20}}  mode="contained" color={'#4267B2'}  onPress={() => googleLogin()}>
+        Login with Facebook
+      </Button>
+      <Button  mode="contained" color={'#DB4437'} onPress={() => googleLogin()}>
+        Login with Google
+      </Button>
     </Background>
     </ScrollView>
     </KeyboardAvoidingView>
