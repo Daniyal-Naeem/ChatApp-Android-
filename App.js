@@ -3,9 +3,7 @@ import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider } from 'react-native-paper'
 import { theme } from './src/core/theme'
-import StackNavigator from './navigation/StackNavigator';
-
-
+import Providers from './navigation';
 
 const App = () => {
   useEffect(()=> {
@@ -13,7 +11,7 @@ const App = () => {
   }, [])
   return (
     <Provider theme={theme}>
-     <StackNavigator/>
+   <Providers/>
     </Provider>
   )
 }
