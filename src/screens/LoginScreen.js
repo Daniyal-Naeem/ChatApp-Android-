@@ -20,7 +20,7 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   
-  const {login, googleLogin} = useContext(AuthContext);
+  const {login, googleLogin, fbLogin} = useContext(AuthContext);
   
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
@@ -82,7 +82,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.link}>Register</Text>
         </TouchableOpacity>
       </View>
-        <Button style={{marginTop:20}}  mode="contained" color={'#4267B2'}  onPress={() => googleLogin()}>
+        <Button style={{marginTop:20}}  mode="contained" color={'#4267B2'}  onPress={() => fbLogin()}>
         Login with Facebook
       </Button>
       <Button  mode="contained" color={'#DB4437'} onPress={() => googleLogin()}>
